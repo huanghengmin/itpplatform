@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Class-Path: commons-pool.jar commons-dbcp1.2.jar commons-net.jar commo
+ ns-logging.jar commons-io.jar commons-digester.jar commons-validator.
+ jar commons-lang.jar commons-discovery.jar commons-logging-api.jar co
+ mmons-fileupload.jar commons-collections.jar commons-codec.jar common
+ s-beanutils.jar commons-attributes-api-2.1.jar httpclient-4.2.1.jar h
+ ttpclient-core-4.0.1.jar httpclient-cache-4.2.1.jar httpmime-4.2.1.ja
+ r httpcore-4.2.1.jar jakarta-oro.jar xercesImpl.jar jtds-1.2.jar ojdb
+ c14.jar proxool.jar itpplatform.jar common.jar xyzbvc.jar logback.jar
+  unitest.jar jdom.jar mina-core-2.0.0.jar protobuf-java-2.4.1.jar jun
+ it-4.1.jar jetty-6.1.2rc0.jar jetty-util-6.1.2rc0.jar mysql-connector
+ -java-5.0.8-bin.jar commons-compiler.jar janino.jar logback-access-1.
+ 0.13.jar logback-classic-1.0.13.jar logback-core-1.0.13.jar slf4j-api
+ -1.7.5.jar jsp-api.jar servlet-api.jar
+

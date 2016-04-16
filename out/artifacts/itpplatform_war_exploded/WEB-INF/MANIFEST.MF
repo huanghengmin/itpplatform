@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Class-Path: stpchange.jar commons-pool.jar commons-dbcp1.2.jar commons
+ -net.jar commons-logging.jar commons-io.jar commons-digester.jar comm
+ ons-validator.jar commons-lang.jar commons-discovery.jar commons-logg
+ ing-api.jar commons-fileupload.jar commons-collections.jar commons-co
+ dec.jar commons-beanutils.jar commons-attributes-api-2.1.jar httpclie
+ nt-4.2.1.jar httpclient-core-4.0.1.jar httpclient-cache-4.2.1.jar htt
+ pmime-4.2.1.jar httpcore-4.2.1.jar filechange.jar dbchange.jar common
+ .jar xyzbvc.jar logback.jar unitest.jar jdom.jar mina-core-2.0.0.jar 
+ protobuf-java-2.4.1.jar junit-4.1.jar jetty-6.1.2rc0.jar jetty-util-6
+ .1.2rc0.jar mysql-connector-java-5.0.8-bin.jar commons-compiler.jar j
+ anino.jar logback-access-1.0.13.jar logback-classic-1.0.13.jar logbac
+ k-core-1.0.13.jar slf4j-api-1.7.5.jar jsp-api.jar servlet-api.jar
+

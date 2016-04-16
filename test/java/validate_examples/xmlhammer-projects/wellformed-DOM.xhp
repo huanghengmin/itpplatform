@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://www.xmlhammer.org/2006/01/project" xmlns:ns2="http://www.xmlhammer.org/2006/01/jaxp" xmlns:ns3="http://www.xmlhammer.org/2006/01/tools/xpath" xmlns:ns4="http://www.xmlhammer.org/2006/01/tools/xslt">
+    <ns2:settings>
+        <ns2:jaxpSAXParserFactory>
+        </ns2:jaxpSAXParserFactory>
+        <ns2:jaxpDocumentBuilderFactory>
+        </ns2:jaxpDocumentBuilderFactory>
+        <ns2:jaxpSchemaFactory>
+        </ns2:jaxpSchemaFactory>
+    </ns2:settings>
+    <input>
+        <source src="../contacts.xml">
+        </source>
+    </input>
+    <parser xincludeAware="false" validating="false" type="dom" namespaceAware="true">
+    </parser>
+</project>

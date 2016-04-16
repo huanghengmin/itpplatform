@@ -1,0 +1,8 @@
+<?xml version = "1.0" ?>
+<!DOCTYPE Employee SYSTEM
+        "D:\fartec\ichange\gdhzca\test\resources\DTD_as_defined_in_the_XML_validate\example\Employee.dtd">
+<Employee>
+	<Emp_Id> E-001 </Emp_Id>
+	<Emp_Name> Vinod </Emp_Name>
+	<Emp_E-mail> Vinod1@yahoo.com </Emp_E-mail>
+</Employee>

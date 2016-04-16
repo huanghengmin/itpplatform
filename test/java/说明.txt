@@ -1,0 +1,4 @@
+1.org下面的源文件可将指定模板XML转为成DTD文件，Main类，详细！（然后用些DTD文件对文件同步的XML作修改，然后校验XML）
+2.DTD文件必须定义到xml文件内部，可以直接是DTD内容（内部），也可以是固定地址或网络地址（外部）
+3.校验xml全部方法  validate-examples 下的源文件
+4.自定义DTD方法(需要先给出指定XML格式)，前面是用XML文件模板生成对应DTD文件（只需要手动写XML模板），如果要自定义DTD,必须手动写，http://www.w3school.com.cn/dtd/（很详细）

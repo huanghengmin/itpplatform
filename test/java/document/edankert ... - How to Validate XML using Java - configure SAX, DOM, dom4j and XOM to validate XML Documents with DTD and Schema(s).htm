@@ -1,0 +1,627 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0088)http://www.edankert.com/validate.html#Validate_using_internal_DTD_and_external_Schema_s_ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)</title><style type="text/css" media="all">
+          @import url("./style/maven-base.css");
+          
+          @import url("./style/maven-theme.css");</style><link rel="stylesheet" href="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/print.css" type="text/css" media="print"><meta name="author" content="Edwin Dankert"><meta name="email" content="edankert%40gmail%2Ecom"><link rel="stylesheet" href="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/adsense.css" type="text/css" media="all"><meta http-equiv="Content-Language" content="EN"><meta name="keywords" content="XML,XML Schema,DTD,JAXP,dom4j,SAX,DOM,XOM"><meta name="description" content="How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)"><script src="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/urchin.js" type="text/javascript"></script><script type="text/javascript">
+_uacct = "UA-75950-1";
+urchinTracker();
+    </script></head><body class="composite"><div id="banner"><a href="http://www.edankert.com/" id="organizationLogo"><img alt="Edwin Dankert" src="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/logo.gif"></a>
+<div id="search">
+<!-- SiteSearch Google -->
+<form method="get" action="http://www.edankert.com/results.html" target="_top">
+<table border="0" bgcolor="#ffffff">
+<tbody><tr>
+<td nowrap="nowrap">
+<input type="radio" name="sitesearch" value="" id="ss0">
+<label for="ss0" title="Search the Web"><font size="-1" color="#000000">web</font></label>
+<input type="radio" name="sitesearch" checked="" value="www.edankert.com" id="ss1">
+<label for="ss1" title="Search www.edankert.com"><font size="-1" color="#000000">edankert.com</font></label>
+<input type="hidden" name="domains" value="www.edankert.com">
+<label for="sbi" style="display: none">Enter your search terms</label>
+<input type="text" name="q" size="31" maxlength="255" value="" id="sbi">
+<label for="sbb" style="display: none">Submit search form</label>
+<input type="submit" name="sa" value="Google Search" id="sbb">
+</td></tr>
+<input type="hidden" name="client" value="pub-9291816534211036">
+<input type="hidden" name="forid" value="1">
+<input type="hidden" name="ie" value="ISO-8859-1">
+<input type="hidden" name="oe" value="ISO-8859-1">
+<input type="hidden" name="cof" value="GALT:#3060A0;GL:1;DIV:#FFFFFF;VLC:102030;AH:center;BGC:FFFFFF;LBGC:336699;ALC:900000;LC:900000;T:000000;GFNT:600000;GIMP:600000;FORID:11">
+<input type="hidden" name="hl" value="en">
+</tbody></table>
+</form>
+<!-- SiteSearch Google -->
+</div>
+      <div class="clear"><hr></div></div><div id="breadcrumbs"><div class="xleft">Last published: 28 October 2010
+                </div><div class="xright">
+        
+        <a href="http://www.edankert.com/index.html">edankert</a>
+      
+        
+          
+            <span class="separator">|</span>
+          
+        
+        <a href="http://www.xmlhammer.org/" class="externalLink" title="External Link">xmlhammer</a>
+      
+        
+          
+            <span class="separator">|</span>
+          
+        
+        <a href="http://www.xngr.org/" class="externalLink" title="External Link">xngr</a>
+      
+        
+          
+            <span class="separator">|</span>
+          
+        
+        <a href="http://www.edankert.com/bounce/index.html">bounce</a>
+      </div><div class="clear"><hr></div></div><div id="leftColumn"><div id="navcolumn"><div id="menuOverview"><h5>Overview</h5><ul><li class="none"><a href="http://www.edankert.com/index.html">About</a></li><li class="none"><a href="http://blog.edankert.com/" class="externalLink" title="External Link">Blog</a></li><li class="none"><a href="http://www.edankert.com/contact.html">Contact</a></li><li class="none"><a href="http://blog.edankert.com/feeds/posts/default?alt=rss" class="externalLink" title="External Link">RSS</a></li></ul></div><div id="menuReferences"><h5>References</h5><ul><li class="none"><a href="http://www.edankert.com/jaxpimplementations.html">JAXP Implementations</a></li><li class="none"><a href="http://www.edankert.com/xpathfunctions.html">XPath 1.0 Functions</a></li></ul></div><div id="menuArticles"><h5>Articles</h5><ul><li class="none"><a href="http://www.edankert.com/defaultnamespaces.html">XPath and Namespaces</a></li><li class="none"><strong><a href="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/validate.htm">Validate XML</a></strong></li></ul></div><div id="menuProjects"><h5>Projects</h5><ul><li class="none"><a href="http://www.xmlhammer.org/" class="externalLink" title="External Link">XML Hammer</a></li><li class="none"><a href="http://www.xngr.org/" class="externalLink" title="External Link">XNGR XML Browser</a></li><li class="collapsed"><a href="http://www.edankert.com/bounce/index.html">Bounce</a></li></ul></div><div id="menuPresentations"><h5>Presentations</h5><ul><li class="none"><a href="http://www.edankert.com/overview/index.html">XML Overview</a></li><li class="none"><a href="http://www.edankert.com/grammars/index.html">XML Grammars</a></li><li class="none"><a href="http://www.edankert.com/transforms/index.html">XML Transforms</a></li><li class="none"><a href="http://www.edankert.com/apis/index.html">XML APIs</a></li></ul></div></div></div><div id="bodyColumn"><div class="contentBox"><div class="adsense">
+		  	<script type="text/javascript" src="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/google.js"></script>
+				<script type="text/javascript" src="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/show_ads.js"></script><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+  	</div><div class="section"><a name="How_to_Validate_XML_using_Java"></a><h2>How to Validate XML using Java</h2>
+<p>
+Configure Java APIs (SAX, DOM, dom4j, XOM) using JAXP 1.3 to validate XML Documents with DTD and Schema(s).
+</p>
+<p>
+Many Java XML APIs provide mechanisms to validate XML documents, the JAXP API can be used 
+for most of these XML APIs but subtle configuration differences exists. This article shows 
+five ways of how to configure different Java APIs (including DOM, SAX, dom4j and XOM) 
+using JAXP 1.3 for checking and validating XML with DTD and Schema(s).
+</p>
+<div class="subsection"><a name="Contents"></a><h3>Contents</h3>
+<p>
+  </p><ul>
+    <li><a href="http://www.edankert.com/validate.html#Setup">Setup</a> (<a href="http://www.edankert.com/validate.html#Error_Handler">Error Handler</a>, <a href="http://www.edankert.com/validate.html#Namespace_Aware">Namespace Aware</a>, <a href="http://www.edankert.com/validate.html#Input_Document">Input Document</a>, <a href="http://www.edankert.com/validate.html#XML_Schema">XML Schema</a>, <a href="http://www.edankert.com/validate.html#DTD">DTD</a>)</li>
+    <li><a href="http://www.edankert.com/validate.html#Checking_Wellformed-ness">Checking Wellformed-ness</a> (<a href="http://www.edankert.com/validate.html#wellformed_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#wellformed_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#wellformed_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#wellformed_XOM">XOM</a>)</li>
+    <li><a href="http://www.edankert.com/validate.html#Validate_using_internal_DTD">Validate using internal DTD</a> (<a href="http://www.edankert.com/validate.html#validate_internal_DTD_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_XOM">XOM</a>)</li>
+    <li><a href="http://www.edankert.com/validate.html#Validate_using_internal_XSD">Validate using internal XSD</a> (<a href="http://www.edankert.com/validate.html#validate_internal_XSD_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_internal_XSD_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_internal_XSD_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_internal_XSD_XOM">XOM</a>)</li>
+    <li><a href="http://www.edankert.com/validate.html#Validate_using_external_Schema_s_">Validate using external Schema(s)</a> (<a href="http://www.edankert.com/validate.html#validate_external_schema_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_external_schema_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_external_schema_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_external_schema_XOM">XOM</a>)</li>
+    <li><a href="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s).htm">Validate using internal DTD and external Schema(s)</a> (<a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_XOM">XOM</a>)</li>
+    <li><a href="http://www.edankert.com/validate.html#Conclusion">Conclusion</a> (<a href="http://www.edankert.com/validate.html#Sample_Code">Sample Code</a>, <a href="http://www.edankert.com/validate.html#Resources">Resources</a>)</li>
+  </ul>
+<p></p>
+</div>
+</div><div class="section"><a name="Setup"></a><h2>Setup</h2>
+<p>
+All underlying examples can be compiled and executed using Java 5.0 (JAXP 1.3) or higher and make use 
+of the following components and settings.
+</p>
+<p>
+  </p><ul>
+    <li><a href="http://www.edankert.com/validate.html#Error_Handler">Error Handler</a></li>
+    <li><a href="http://www.edankert.com/validate.html#Namespace_Aware">Namespace Aware</a></li>
+    <li><a href="http://www.edankert.com/validate.html#Input_Document">Input Document</a></li>
+    <li><a href="http://www.edankert.com/validate.html#XML_Schema">XML Schema</a></li>
+    <li><a href="http://www.edankert.com/validate.html#DTD">DTD</a></li>
+  </ul>
+<p></p>
+<div class="subsection"><a name="Error_Handler"></a><h3>Error Handler</h3>
+<p>
+To report errors, it is necessary to provide an <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/ErrorHandler.html" title="External Link" class="noimage">ErrorHandler</a> to the underlying implementation. 
+The <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/ErrorHandler.html" title="External Link" class="noimage">ErrorHandler</a> used for the examples is a very simple one which reports the error to 
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/System.html" title="External Link" class="noimage">System</a>.out and continues until the XML document has been fully parsed or until a fatal-error has 
+been reported.
+</p>
+
+    <div class="source"><pre><span class="keyword">public class</span> SimpleErrorHandler <span class="keyword">implements</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/ErrorHandler.html" title="External Link" class="noimage">ErrorHandler</a> {
+    <span class="keyword">public void</span> warning(<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXParseException.html" title="External Link" class="noimage">SAXParseException</a> e) <span class="keyword">throws</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html" title="External Link" class="noimage">SAXException</a> {
+        <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/System.html" title="External Link" class="noimage">System</a>.out.println(e.getMessage());
+    }
+
+    <span class="keyword">public void</span> error(<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXParseException.html" title="External Link" class="noimage">SAXParseException</a> e) <span class="keyword">throws</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html" title="External Link" class="noimage">SAXException</a> {
+        <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/System.html" title="External Link" class="noimage">System</a>.out.println(e.getMessage());
+    }
+
+    <span class="keyword">public void</span> fatalError(<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXParseException.html" title="External Link" class="noimage">SAXParseException</a> e) <span class="keyword">throws</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/SAXException.html" title="External Link" class="noimage">SAXException</a> {
+        <a href="http://java.sun.com/j2se/1.5.0/docs/api/java/lang/System.html" title="External Link" class="noimage">System</a>.out.println(e.getMessage());
+    }
+}
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="Namespace_Aware"></a><h3>Namespace Aware</h3>
+<p>
+Namespaces have been introduced to XML after the first specification of XML had received the official W3C 
+Recommendation status. This is the reason why (most of the) XML parser implementations do not support XML 
+Namespaces by default, to handle the validation of XML documents with namespaces correctly it is therefore 
+necessary to configure the underlying parsers to provide support for XML Namespaces.
+</p>
+</div>
+<div class="subsection"><a name="Input_Document"></a><h3>Input Document</h3>
+<p>
+The input document (<code>"contacts.xml"</code>) that has been used for all the code examples is shown below.
+</p>
+
+    <div class="source"><pre>&lt;!<span class="keyword">DOCTYPE</span> contacts <span class="keyword">SYSTEM</span> "contacts.dtd"&gt;
+
+&lt;<span class="keyword">contacts</span> <span class="keyword">xsi:noNamespaceSchemaLocation</span>="contacts.xsd" 
+  <span class="keyword">xmlns:xsi</span>="http://www.w3.org/2001/XMLSchema-instance"&gt; 
+  &lt;<span class="keyword">contact</span> <span class="keyword">title</span>="citizen"&gt; 
+    &lt;<span class="keyword">firstname</span>&gt;Edwin&lt;/<span class="keyword">firstname</span>&gt; 
+    &lt;<span class="keyword">lastname</span>&gt;Dankert&lt;/<span class="keyword">lastname</span>&gt;
+  &lt;/<span class="keyword">contact</span>&gt; 
+&lt;/<span class="keyword">contacts</span>&gt;
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="XML_Schema"></a><h3>XML Schema</h3>
+<p>
+The XML Schema (<code>"contacts.xsd"</code>) as defined below has been used in the code examples to validate the input 
+document. The input document contains an extra attribute which has not been defined in the XML Schema, this shows that 
+the XML Schema has been used for the validation. When using this XML Schema to validate the input XML document, the 
+following error gets reported: 
+</p>
+<p>
+<code>cvc-complex-type.3.2.2: Attribute 'title' is not allowed to appear in element 'contact'.</code>
+</p>
+
+    <div class="source"><pre>&lt;<span class="keyword">xs:schema</span> <span class="keyword">xmlns:xs</span>="<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>"&gt;
+  &lt;<span class="keyword">xs:element</span> <span class="keyword">name</span>="contacts"&gt;
+    &lt;<span class="keyword">xs:complexType</span>&gt;
+      &lt;<span class="keyword">xs:sequence</span>&gt;
+        &lt;<span class="keyword">xs:element</span> <span class="keyword">ref</span>="contact"/&gt;
+      &lt;/<span class="keyword">xs:sequence</span>&gt;
+    &lt;/<span class="keyword">xs:complexType</span>&gt;
+  &lt;/<span class="keyword">xs:element</span>&gt;
+
+  &lt;<span class="keyword">xs:element</span> <span class="keyword">name</span>="contact"&gt;
+    &lt;<span class="keyword">xs:complexType</span>&gt;
+      &lt;<span class="keyword">xs:sequence</span>&gt;
+        &lt;<span class="keyword">xs:element</span> <span class="keyword">name</span>="firstname" <span class="keyword">type</span>="xs:NCName"/&gt;
+        &lt;<span class="keyword">xs:element</span> <span class="keyword">name</span>="lastname" <span class="keyword">type</span>="xs:NCName"/&gt;
+      &lt;/<span class="keyword">xs:sequence</span>&gt;
+    &lt;/<span class="keyword">xs:complexType</span>&gt;
+  &lt;/<span class="keyword">xs:element</span>&gt;
+&lt;/<span class="keyword">xs:schema</span>&gt;
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="DTD"></a><h3>DTD</h3>
+<p>
+The DTD (<code>"contacts.dtd"</code>) as defined below has been used in the code examples to validate the input 
+document. To highlight that the DTD has been used for the validation, the title attribute in the input document 
+has a value which is not allowed according to this DTD. When using this DTD to validate the input XML document, 
+the following error gets reported: 
+</p>
+<p>
+<code>Attribute "title" with value "citizen" must have a value from the list "MR MS MRS ".</code>
+</p>
+
+    <div class="source"><pre>&lt;!<span class="keyword">ELEMENT</span> contacts (contact*)&gt;
+&lt;!<span class="keyword">ATTLIST</span> contacts xsi:noNamespaceSchemaLocation <span class="keyword">CDATA #IMPLIED</span>&gt;
+&lt;!<span class="keyword">ATTLIST</span> contacts xmlns:xsi <span class="keyword">CDATA #IMPLIED</span>&gt;
+
+&lt;!<span class="keyword">ELEMENT</span> contact (firstname,lastname)&gt;
+&lt;!<span class="keyword">ATTLIST</span> contact title (MR|MS|MRS) "MS"&gt;
+
+&lt;!<span class="keyword">ELEMENT</span> firstname (<span class="keyword">#PCDATA</span>)&gt;
+&lt;!<span class="keyword">ELEMENT</span> lastname (<span class="keyword">#PCDATA</span>)&gt;
+</pre></div>
+  
+</div>
+</div><div class="section"><a name="Checking_Wellformed-ness"></a><h2>Checking Wellformed-ness</h2>
+Before a document can be called XML and not csv, simple text or any other format, it needs to support 
+the basic rules as defined by the XML Recommendation, when it adheres to these rules it is said 
+to be <b>Wellformed XML</b>.
+<p>
+Code Fragments: <a href="http://www.edankert.com/validate.html#wellformed_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#wellformed_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#wellformed_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#wellformed_XOM">XOM</a>
+</p>
+<div class="subsection"><a name="wellformed_DOM"></a><h3>DOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">false</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilder.html" title="External Link" class="noimage">DocumentBuilder</a> builder = factory.newDocumentBuilder();
+
+builder.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/w3c/dom/Document.html" title="External Link" class="noimage">Document</a> document = builder.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="wellformed_SAX"></a><h3>SAX</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">false</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="wellformed_dom4j"></a><h3>dom4j</h3>
+
+    <div class="source"><pre><a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a> reader = <span class="keyword">new</span> <a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a>();
+reader.setValidation(<span class="keyword">false</span>);
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.read("contacts.xml");
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="wellformed_XOM"></a><h3>XOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">false</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a> builder = <span class="keyword">new</span> <a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a>(reader);
+builder.build("contacts.xml");
+</pre></div>
+  
+</div>
+</div><div class="section"><a name="Validate_using_internal_DTD"></a><h2>Validate using internal DTD</h2>
+<p>
+Parse the input document using only the DTD (<code>contacts.dtd</code>), as defined by the DOCTYPE in the 
+input document, for validation.
+</p>
+<p>
+Code Fragments: <a href="http://www.edankert.com/validate.html#validate_internal_DTD_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_XOM">XOM</a>
+</p>
+<div class="subsection"><a name="validate_internal_DTD_DOM"></a><h3>DOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilder.html" title="External Link" class="noimage">DocumentBuilder</a> builder = factory.newDocumentBuilder();
+
+builder.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/w3c/dom/Document.html" title="External Link" class="noimage">Document</a> document = builder.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_DTD_SAX"></a><h3>SAX</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_DTD_dom4j"></a><h3>dom4j</h3>
+
+    <div class="source"><pre><a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a> reader = <span class="keyword">new</span> <a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a>();
+reader.setValidation(<span class="keyword">true</span>);
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.read("contacts.xml");
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_DTD_XOM"></a><h3>XOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a> builder = <span class="keyword">new</span> <a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a>(reader);
+builder.build("contacts.xml");
+</pre></div>
+  
+</div>
+</div><div class="section"><a name="Validate_using_internal_XSD"></a><h2>Validate using internal XSD</h2>
+<p>
+Parse the input document using only the XML Schema (<code>contacts.xsd</code>), as defined by the 
+noNamespaceSchemaLocation attribute in the input document, for validation.
+</p>
+<p>
+Code Fragments: <a href="http://www.edankert.com/validate.html#validate_internal_XSD_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_internal_XSD_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_internal_XSD_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_internal_XSD_XOM">XOM</a>
+</p>
+<div class="subsection"><a name="validate_internal_XSD_DOM"></a><h3>DOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+<span class="highlight">factory.setAttribute("http://java.sun.com/xml/jaxp/properties/schemaLanguage", 
+      "<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilder.html" title="External Link" class="noimage">DocumentBuilder</a> builder = factory.newDocumentBuilder();
+
+builder.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/w3c/dom/Document.html" title="External Link" class="noimage">Document</a> document = builder.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_XSD_SAX"></a><h3>SAX</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+<span class="highlight">parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage", 
+      "<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_XSD_dom4j"></a><h3>dom4j</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+<span class="highlight">parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage", 
+      "<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a> reader = <span class="keyword">new</span> <a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a>(parser.getXMLReader());
+reader.setValidation(<span class="keyword">true</span>);
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.read("contacts.xml");
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_XSD_XOM"></a><h3>XOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+<span class="highlight">parser.setProperty("http://java.sun.com/xml/jaxp/properties/schemaLanguage", 
+      "<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a> builder = <span class="keyword">new</span> <a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a>(reader);
+builder.build("contacts.xml");
+</pre></div>
+  
+</div>
+</div><div class="section"><a name="Validate_using_external_Schema"></a><h2>Validate using external Schema</h2>
+<p>
+Parse the input document using the schema (<code>contacts.xsd</code>), as defined externally by the source-code.
+</p>
+<p>
+Code Fragments: <a href="http://www.edankert.com/validate.html#validate_external_schema_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_external_schema_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_external_schema_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_external_schema_XOM">XOM</a>
+</p>
+<div class="subsection"><a name="validate_external_schema_DOM"></a><h3>DOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">false</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilder.html" title="External Link" class="noimage">DocumentBuilder</a> builder = factory.newDocumentBuilder();
+
+builder.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/w3c/dom/Document.html" title="External Link" class="noimage">Document</a> document = builder.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_external_schema_SAX"></a><h3>SAX</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">false</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_external_schema_dom4j"></a><h3>dom4j</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a> reader = <span class="keyword">new</span> <a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a>(parser.getXMLReader());
+reader.setValidation(<span class="keyword">false</span>);
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.read("contacts.xml");
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_external_schema_XOM"></a><h3>XOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">false</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a> builder = <span class="keyword">new</span> <a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a>(reader);
+builder.build("contacts.xml");
+</pre></div>
+  
+</div>
+</div><div class="section"><a name="Validate_using_internal_DTD_and_external_Schema"></a><h2>Validate using internal DTD and external Schema</h2>
+<p>
+Parse the input document using the schema (<code>contacts.xsd</code>), as defined externally by the source-code and the DTD 
+(<code>contacts.dtd</code>), as defined by the <span class="keyword">DOCTYPE</span> in the input document, for validation.
+</p>
+<p>
+Code Fragments: <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_DOM">DOM</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_SAX">SAX</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_dom4j">dom4j</a>, <a href="http://www.edankert.com/validate.html#validate_internal_DTD_external_schema_XOM">XOM</a>
+</p>
+<div class="subsection"><a name="validate_internal_DTD_external_schema_DOM"></a><h3>DOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilderFactory.html" title="External Link" class="noimage">DocumentBuilderFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/DocumentBuilder.html" title="External Link" class="noimage">DocumentBuilder</a> builder = factory.newDocumentBuilder();
+
+builder.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/w3c/dom/Document.html" title="External Link" class="noimage">Document</a> document = builder.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_DTD_external_schema_SAX"></a><h3>SAX</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.parse(<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/InputSource.html" title="External Link" class="noimage">InputSource</a>("document.xml"));
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_DTD_external_schema_dom4j"></a><h3>dom4j</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+
+<a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a> reader = <span class="keyword">new</span> <a href="http://www.dom4j.org/apidocs/org/dom4j/io/SAXReader.html" title="External Link" class="noimage">SAXReader</a>(parser.getXMLReader());
+reader.setValidation(<span class="keyword">true</span>);
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+reader.read("contacts.xml");
+</pre></div>
+  
+</div>
+<div class="subsection"><a name="validate_internal_DTD_external_schema_XOM"></a><h3>XOM</h3>
+
+    <div class="source"><pre><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a> factory = <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParserFactory.html" title="External Link" class="noimage">SAXParserFactory</a>.newInstance();
+<span class="highlight">factory.setValidating(<span class="keyword">true</span>);</span>
+factory.setNamespaceAware(<span class="keyword">true</span>);
+
+<span class="highlight"><a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a> schemaFactory = 
+    <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/validation/SchemaFactory.html" title="External Link" class="noimage">SchemaFactory</a>.newInstance("<a href="http://www.w3.org/2001/XMLSchema" title="External Link" class="noimage">http://www.w3.org/2001/XMLSchema</a>");</span>
+<span class="highlight">factory.setSchema(schemaFactory.newSchema(
+    <span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/Source.html" title="External Link" class="noimage">Source</a>[] {<span class="keyword">new</span> <a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/transform/stream/StreamSource.html" title="External Link" class="noimage">StreamSource</a>("contacts.xsd")}));</span>
+
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/javax/xml/parsers/SAXParser.html" title="External Link" class="noimage">SAXParser</a> parser = factory.newSAXParser();
+<a href="http://java.sun.com/j2se/1.5.0/docs/api/org/xml/sax/XMLReader.html" title="External Link" class="noimage">XMLReader</a> reader = parser.getXMLReader();
+reader.setErrorHandler(<span class="keyword">new</span> <a href="http://www.edankert.com/validate.html#Error_Handler" class="noimage">SimpleErrorHandler</a>());
+
+<a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a> builder = <span class="keyword">new</span> <a href="http://www.cafeconleche.org/XOM/apidocs/nu/xom/Builder.html" title="External Link" class="noimage">Builder</a>(reader);
+builder.build("contacts.xml");
+</pre></div>
+  
+</div>
+</div><div class="section"><a name="Conclusion"></a><h2>Conclusion</h2>
+<p>
+Several mechanisms and XML APIs can be used to parse and validate XML, by using JAXP 1.3 the mechanism can mostly stay the same for these 
+different APIs.
+</p>
+<div class="subsection"><a name="Sample_Code"></a><h3>Sample Code</h3>
+<p>Download any of the archives to get the full source-code for the examples above.
+</p><ul>
+  <li><a href="http://www.edankert.com/downloads/validate-examples.zip">validate-examples.zip</a></li>
+  <li><a href="http://www.edankert.com/downloads/validate-examples.tar.gz">validate-examples.tar.gz</a></li>
+</ul>
+<p></p>
+<p>
+The archives consist of the <code>./contacts.xml</code> input XML file, <code>./contacts.xsd</code> the XML Schema 
+document, <code>./contacts.dtd</code> the DTD document and the source-code for the fragments above, located 
+in the <code>./src</code> directory.
+</p>
+<p>
+The archive also contains a number <a href="http://www.xmlhammer.org/" class="externalLink" title="External Link">XML Hammer</a> validation projects included 
+in the <code>./xmlhammer-projects</code> directory. To be able to execute these <a href="http://www.xmlhammer.org/" class="externalLink" title="External Link">XML Hammer</a>
+projects, you will need to have the <a href="http://www.xmlhammer.org/" class="externalLink" title="External Link">XML Hammer</a> application installed. This 
+can be downloaded from:
+</p>
+<p>
+<a href="http://www.xmlhammer.org/downloads.html" class="externalLink" title="External Link">http://www.xmlhammer.org/downloads.html</a>.
+</p>
+</div>
+<div class="subsection"><a name="Resources"></a><h3>Resources</h3>
+<p>
+</p><ul>
+  <li>Extensible Markup Language (XML) 1.0<br><br>
+  <a href="http://www.w3.org/TR/REC-xml/" class="externalLink" title="External Link">http://www.w3.org/TR/REC-xml/</a></li>
+  <li>Namespaces in XML<br><br>
+  <a href="http://www.w3.org/TR/REC-xml-names/" class="externalLink" title="External Link">http://www.w3.org/TR/REC-xml-names/</a></li>
+  <li>Java 5.0<br><br>
+  <a href="http://java.sun.com/j2se/1.5.0/" class="externalLink" title="External Link">http://java.sun.com/j2se/1.5.0/</a></li>
+  <li>Java 6.0<br><br>
+  <a href="http://java.sun.com/javase/6/" class="externalLink" title="External Link">http://java.sun.com/javase/6/</a></li>
+  <li>JAXP<br><br>
+  <a href="http://jcp.org/en/jsr/detail?id=206" class="externalLink" title="External Link">http://jcp.org/en/jsr/detail?id=206</a></li>
+  <li>dom4j<br><br>
+  <a href="http://www.dom4j.org/" class="externalLink" title="External Link">http://www.dom4j.org/</a></li>
+  <li>XOM<br><br>
+  <a href="http://www.xom.nu/" class="externalLink" title="External Link">http://www.xom.nu/</a></li>
+  <li>JDOM<br><br>
+  <a href="http://www.jdom.org/" class="externalLink" title="External Link">http://www.jdom.org/</a></li>
+</ul>
+<p></p>
+</div>
+</div><div class="adsense">
+		  	<script type="text/javascript" src="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/google.js"></script>
+				<script type="text/javascript" src="./edankert ... - How to Validate XML using Java - configure SAX, DOM, dom4j and XOM to validate XML Documents with DTD and Schema(s)_files/show_ads.js"></script><ins style="display:inline-table;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:90px;margin:0;padding:0;position:relative;visibility:visible;width:728px;background-color:transparent"><iframe width="728" height="90" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;"></iframe></ins></ins>
+  	</div></div></div><div class="clear"><hr></div><div id="footer"><div class="xleft">
+	    email: <a href="mailto:edankert%40gmail%2Ecom">edankert<b></b>@<b></b>gmail<b></b>.<b></b>com</a>
+    </div><div class="xright">© 2005-2010, Edwin Dankert</div><div class="clear"><hr></div></div></body></html>
